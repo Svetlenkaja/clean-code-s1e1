@@ -9,8 +9,8 @@
 // Event handling, user interaction is what starts the code execution.
 
 var taskInput=document.getElementById("new-task");//Add a new task.
-var addButton=document.getElementsByTagName("button")[0];//first button
-var incompleteTaskHolder=document.getElementById("incompleteTasks");//ul of #incompleteTasks
+var addButton=document.querySelector(".new-task__button");//first button
+var incompleteTaskHolder=document.getElementById("incomplete-tasks");//ul of #incompleteTasks
 var completedTasksHolder=document.getElementById("completed-tasks");//completed-tasks
 
 
@@ -44,11 +44,11 @@ var createNewTaskElement=function(taskString){
   editInput.className="tasks__text";
 
   editButton.innerText="Edit"; //innerText encodes special characters, HTML does not.
-  editButton.className="button edit";
+  editButton.className="tasks__button tasks__button__edit";
 
-  deleteButton.className="button delete";
+  deleteButton.className="tasks__button tasks__button__delete";
   deleteButtonImg.src='./remove.svg';
-  deleteButtonImg.className="button__img__delete";
+  deleteButtonImg.className="tasks__img__delete";
   deleteButton.appendChild(deleteButtonImg);
 
 
@@ -86,10 +86,10 @@ var editTask=function(){
 
   var listItem=this.parentNode;
 
-  var editInput=listItem.querySelector('tasks__text');
+  var editInput=listItem.querySelector('.tasks__text');
   var label=listItem.querySelector(".tasks__label");
-  var editBtn=listItem.querySelector(".button.edit");
-  var containsClass=listItem.classList.contains("editMode");
+  var editBtn=listItem.querySelector(".tasks__button__edit");
+  var containsClass=listItem.classList.contains("tasks__item__edit");
   //If class of the parent is .editmode
   if(containsClass){
 
@@ -104,7 +104,7 @@ var editTask=function(){
 
   //toggle .editmode on the parent.
   label.classList.toggle("tasks__label__edit");
-  listItem.classList.toggle("editMode");
+  listItem.classList.toggle("tasks__item__edit");
 };
 
 
@@ -163,8 +163,8 @@ var bindTaskEvents=function(taskListItem,checkBoxEventHandler){
   console.log("bind list item events");
 //select ListItems children
   var checkBox=taskListItem.querySelector(".tasks__checkbox");
-  var editButton=taskListItem.querySelector("button.edit");
-  var deleteButton=taskListItem.querySelector("button.delete");
+  var editButton=taskListItem.querySelector(".tasks__button__edit");
+  var deleteButton=taskListItem.querySelector(".tasks__button__delete");
 
 
   //Bind editTask to edit button.
